@@ -8,7 +8,7 @@ class HorizontalMenuItem extends StatelessWidget {
     double indicatorTickness = 2.0,
     int indicatorWidthRelation = 2,
     Color inticatorColor = Colors.black,
-    Color baseLineColor = Colors.black,
+    Color baseLineColor = Colors.black26,
     Widget title = const Text('Menu Item'),
     Function({int selectedIndex}) onSelect,
     @required GlobalKey menuItemKey,
@@ -44,34 +44,37 @@ class HorizontalMenuItem extends StatelessWidget {
         children: [
           _title,
           SizedBox(height: 12.0),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Flexible(
-                flex: 1,
-                child: Container(
-                  height: 1,
-                  width: double.infinity,
-                  color: _baseLineColor,
+          Container(
+            height: _indicatorTickness,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: _baseLineColor,
+                  ),
                 ),
-              ),
-              Flexible(
-                flex: _indicatorWidthRelation,
-                child: Container(
-                  height: _isActive ? _indicatorTickness : 1,
-                  width: double.infinity,
-                  color: _isActive ? _inticatorColor : _baseLineColor,
+                Flexible(
+                  flex: _indicatorWidthRelation,
+                  child: Container(
+                    height: _isActive ? _indicatorTickness : 1,
+                    width: double.infinity,
+                    color: _isActive ? _inticatorColor : _baseLineColor,
+                  ),
                 ),
-              ),
-              Flexible(
-                flex: 1,
-                child: Container(
-                  height: 1,
-                  width: double.infinity,
-                  color: _baseLineColor,
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: _baseLineColor,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

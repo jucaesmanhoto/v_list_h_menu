@@ -18,17 +18,15 @@ class TwinListsPage extends StatefulWidget {
 class _TwinListsPageState extends ModularState<TwinListsPage, AppController> {
   final ScrollController _verticalScroll = ScrollController();
   final ScrollController _horizontalScroll = ScrollController();
-  // List<GlobalKey> _verticalKeys = [];
-  // List<GlobalKey> _horizontalKeys = [];
-  // List<double> _sectionsVerticalPositions = [];
-  // List<double> _horizontalMenuItemsPositions = [];
+  final List<double> _initialVerticalPositions = [];
+  final List<double> _initialHorizontalPositions = [];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // await _generateVerticalKeys();
-      // await _getSectionsPositions();
+      _getVerticalPositions();
+      _getHorizontalPositions();
       _verticalScroll.addListener(_addVerticalScrollListeners);
     });
   }
@@ -44,13 +42,27 @@ class _TwinListsPageState extends ModularState<TwinListsPage, AppController> {
           child: Column(
             children: [
               HorizontalList(
+                appController: controller,
                 controller: _horizontalScroll,
                 menuItemWidth: 80.0,
                 sections: widget.sections,
                 onHorizontalMenuItemSelect: ({int selectedIndex}) {
-                  Scrollable.ensureVisible(
-                    widget.sections[selectedIndex].sectionKey.currentContext,
-                    duration: Duration(milliseconds: 1000),
+                  controller.selectIndex(index: selectedIndex);
+                  // Scrollable.ensureVisible(
+                  //   widget.sections[selectedIndex].sectionKey.currentContext,
+                  //   duration: Duration(milliseconds: 1000),
+                  // );
+                  // _horizontalScroll.animateTo(
+                  //   _initialHorizontalPositions[selectedIndex],
+                  //   duration: Duration(milliseconds: 1000),
+                  //   curve: Curves.linear,
+                  // );
+                  _verticalScroll.animateTo(
+                    _initialVerticalPositions[selectedIndex] -
+                        _initialVerticalPositions[0] +
+                        1,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.linear,
                   );
                 },
               ),
@@ -67,15 +79,60 @@ class _TwinListsPageState extends ModularState<TwinListsPage, AppController> {
     );
   }
 
-  // Future<void> _getSectionsPositions() async {
-  //   _sectionsVerticalPositions = List.generate(_verticalKeys.length, (index) {
-  //     final RenderBox renderBox =
-  //         _verticalKeys[index].currentContext.findRenderObject();
-  //     return renderBox.localToGlobal(Offset.zero).dy;
-  //   });
-  // }
+  Offset _getRenderBoxOffset({GlobalKey elementKey}) {
+    final RenderBox renderBox = elementKey.currentContext.findRenderObject();
+    return renderBox.localToGlobal(Offset.zero);
+  }
+
+  void _getVerticalPositions() {
+    widget.sections.forEach((section) {
+      _initialVerticalPositions
+          .add(_getRenderBoxOffset(elementKey: section.sectionKey).distance);
+    });
+    print(_initialVerticalPositions);
+  }
+
+  void _getHorizontalPositions() {
+    widget.sections.forEach((section) {
+      _initialHorizontalPositions
+          .add(_getRenderBoxOffset(elementKey: section.menuItemKey).distance);
+    });
+    print(_initialHorizontalPositions);
+  }
 
   void _addVerticalScrollListeners() {
-    widget.sections.forEach((section) {});
+    final RenderBox menuItemRenderBox =
+        widget.sections[0].menuItemKey.currentContext.findRenderObject();
+    final Offset menuItemVerticalPosition =
+        menuItemRenderBox.localToGlobal(Offset.zero);
+
+    for (var i = 0; i < widget.sections.length; i++) {
+      if (i == 0) {
+        if (_verticalScroll.offset <
+                (_initialVerticalPositions[i + 1] -
+                    _initialVerticalPositions[0]) &&
+            controller.selectedIndex != i) {
+          print('section $i');
+          controller.selectIndex(index: i);
+        }
+      } else if (i == widget.sections.length - 1) {
+        if (_verticalScroll.offset >
+                (_initialVerticalPositions[i] - _initialVerticalPositions[0]) &&
+            controller.selectedIndex != i) {
+          print('section $i');
+          controller.selectIndex(index: i);
+        }
+      } else {
+        if (_verticalScroll.offset <
+                (_initialVerticalPositions[i + 1] -
+                    _initialVerticalPositions[0]) &&
+            _verticalScroll.offset >
+                (_initialVerticalPositions[i] - _initialVerticalPositions[0]) &&
+            controller.selectedIndex != i) {
+          print('section $i');
+          controller.selectIndex(index: i);
+        }
+      }
+    }
   }
 }
