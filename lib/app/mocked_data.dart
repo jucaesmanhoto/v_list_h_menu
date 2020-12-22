@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'twin_lists/vertical_list/section_model.dart';
+import 'package:horizontal_menu_to_vertical/widgets/vertical_sections/section_model.dart';
 
 List<Widget> mockedItems = [
   Container(
@@ -82,28 +81,28 @@ List<SectionModel> mockedSections = [
     horizontalMenuTitle: Text('Section 5'),
     sectionItems: mockedItems,
   ),
-  SectionModel(
-    sectionIndex: 6,
-    sectionHeader: Text('Section 6'),
-    horizontalMenuTitle: Text('Section 6'),
-    sectionItems: mockedItems,
-  ),
-  SectionModel(
-    sectionIndex: 7,
-    sectionHeader: Text('Section 7'),
-    horizontalMenuTitle: Text('Section 7'),
-    sectionItems: mockedItems,
-  ),
-  SectionModel(
-    sectionIndex: 8,
-    sectionHeader: Text('Section 8'),
-    horizontalMenuTitle: Text('Section 8'),
-    sectionItems: mockedItems,
-  ),
-  SectionModel(
-    sectionIndex: 9,
-    sectionHeader: Text('Section 9'),
-    horizontalMenuTitle: Text('Section 9'),
-    sectionItems: mockedItems,
-  ),
+  // SectionModel(
+  //   sectionIndex: 6,
+  //   sectionHeader: Text('Section 6'),
+  //   horizontalMenuTitle: Text('Section 6'),
+  //   sectionItems: mockedItems,
+  // ),
+  // SectionModel(
+  //   sectionIndex: 7,
+  //   sectionHeader: Text('Section 7'),
+  //   horizontalMenuTitle: Text('Section 7'),
+  //   sectionItems: mockedItems,
+  // ),
+  // SectionModel(
+  //   sectionIndex: 8,
+  //   sectionHeader: Text('Section 8'),
+  //   horizontalMenuTitle: Text('Section 8'),
+  //   sectionItems: mockedItems,
+  // ),
+  // SectionModel(
+  //   sectionIndex: 9,
+  //   sectionHeader: Text('Section 9'),
+  //   horizontalMenuTitle: Text('Section 9'),
+  //   sectionItems: mockedItems,
+  // ),
 ];

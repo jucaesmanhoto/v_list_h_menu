@@ -33,10 +33,11 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  dio: ^3.0.10
   flutter_mobx: ^1.1.0+2
   mobx: ^1.2.1+4
   flutter_modular: ^2.0.1
+  horizontal_menu_to_vertical:
+    path: ../../olgari/pckgs/horizontal_menu_to_vertical_sections 
   flutter:
     sdk: flutter
 

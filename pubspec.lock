@@ -162,13 +162,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.10"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.10"
   fake_async:
     dependency: transitive
     description:
@@ -228,6 +221,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  horizontal_menu_to_vertical:
+    dependency: "direct main"
+    description:
+      path: "../../olgari/pckgs/horizontal_menu_to_vertical_sections"
+      relative: true
+    source: path
+    version: "0.0.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -508,3 +508,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0 <2.11.0"
+  flutter: ">=1.17.0"

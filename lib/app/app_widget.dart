@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:twin_list_views/app/twin_lists/twin_lists_page.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -9,9 +10,10 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      onGenerateRoute: Modular.generateRoute,
-      navigatorKey: Modular.navigatorKey,
-      initialRoute: Modular.initialRoute,
+      home: TwinListsPage(),
+      // onGenerateRoute: Modular.generateRoute,
+      // navigatorKey: Modular.navigatorKey,
+      // initialRoute: Modular.initialRoute,
     );
   }
 }
